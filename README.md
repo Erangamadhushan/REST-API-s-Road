@@ -1,4 +1,6 @@
 # REST API (Restful API)
+Read Article with <a href='https://medium.com/@erangamadhushann956/introduction-about-rest-api-restful-api-e6a375e21ae6'>Medium</a><br/>
+Building a Simple REST API using<a href=""> Node.js and Express</a>
 
 #### A REST API is the most common standard used between Clients (a person or application) who want to access information from the web from Servers (application or database) who have access to that information.
 
@@ -125,4 +127,7 @@ Upon receiving a HTTP request in the basic RESTful format the server will return
 |500 Internal Server Error|Server side error. Usually due to bugs and exceptions thrown on the server side code|
 |503 Server Unavailable|Server side error. Usually due to a platform hosting, overload and maintenance issue|
 
+Author: Eranga Madhushan<br/>
+Resources:<br/>
+![Geeksforgeek]('https://www.geeksforgeeks.org/node-js/rest-api-introduction/')
 
