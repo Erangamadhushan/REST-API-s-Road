@@ -1,39 +1,31 @@
 // Import the Express module
 const express = require('express');
+const userRoutes = require('./routes/users.routes');
+const { validation } = require('./middleware/validation.middleware');
+const { AppError } = require('./utils/errorHandler.utils');
+
+// Create an Express application
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Basic route to check if the server is running
 app.get('/', (req, res) => {
     res.send('Hello, World! The server is running.');
 });
 
+// Import user routes
+app.use('/api/users', userRoutes);
 
-// Define a route for GET requests
-app.get('/users', (req, res) => {
-    res.json({ message: 'Returning list of users' });
+// This route throws a custom error
+app.get('/api/error-demo', (req, res, next) => {
+  next(new AppError(404, 'Resource not found'));
 });
 
-// Define a route for POST requests
-app.post('/users', (req, res) => {
-    const newUser = req.body;
-    res.json({ message: 'User created', user: newUser });
-});
-
-// Define a route for PUT requests
-app.put('/users/:id', (req, res) => {
-    const userId = req.params.id;
-    const updatedUser = req.body;
-    res.json({ message: `User with ID ${userId} updated`, updatedUser });
-});
-
-// Define a route for DELETE requests
-app.delete('/users/:id', (req, res) => {
-    const userId = req.params.id;
-    res.json({ message: `User with ID ${userId} deleted` });
-});
+// Error handling middleware (must be last)
+app.use(validation);
 
 // Start the server
 app.listen(port, () => {
